@@ -50,7 +50,7 @@
     <div class="container">
         <h1>Bienvenido al sistema de ventas y almacén</h1>
         <p>Ferretería SOCIO CONSTRUCTOR</p>
-        <a href="#" class="btn">Ingresar al sistema</a>
+        <a href="{{route('')}}" class="btn">Ingresar al sistema</a>
     </div>
 </body>
 </html>

@@ -65,7 +65,7 @@
 <body>
     <div class="container">
         <h1>Crear Nueva Venta</h1>
-        <form action="/ventas/store" method="POST">
+        <form action="{{route('store_venta')}}" method="POST">
             <label for="producto">Producto:</label>
             <input type="text" id="producto" name="producto" required>
 
