@@ -9,7 +9,7 @@
         $proveedor = session('proveedor'); // Acceder al proveedor desde la sesión
     @endphp
     <div class="container">
-        <h1>En esta pagina podras crear un nuevo proveedor</h1>
+        <h1>En esta pagina podras Eliminar un proveedor</h1>
         <form action="{{route('proveedor_delete',$proveedor->id)}}" method="post">
 
             {{csrf_field()}}
