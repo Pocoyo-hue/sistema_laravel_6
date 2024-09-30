@@ -1,38 +1,44 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VentaController;
+use App\Http\Controllers\AlmacenController;
 
-Route::get('/', function () {
-    return "Bienvenido a la página principal";
-});
+/*
+|--------------------------------------------------------------------------
+| Rutas de ventas
+|--------------------------------------------------------------------------
+*/
 
-//Agregando nueva ruta
-Route::get('practicas-profesionales', function(){
-    return "Bienvenido a la Gestión de Prácticas Preprofesionales";
-});
-
-//Agregando nueva ruta para CREAR un nuevo registro
-Route::get('practicas/create', function(){
-    return "En esta página podrás crear un nuevo registro.";
+Route::controller(VentaController::class)->group(function(){
+    Route::get('ventas', 'index');           // Listar todas las ventas
+    Route::get('ventas/create', 'create');   // Formulario para crear una nueva venta
+    Route::post('ventas/store', 'store');    // Guardar una nueva venta en la base de datos
+    Route::get('ventas/{id}', 'show');       // Ver detalles de una venta específica
 });
 
 /*
-//Agregando nueva ruta con variable
-Route::get('practicas/{procedimiento}',function($procedimiento){
-    return "Bienvenido al procedimiento: $procedimiento";
-});
-
-//Agregando nueva ruta con dos variable
-Route::get('practicas/{procedimiento}/{registro}',function($procedimiento,$registro){
-    return "Bienvenido al registro: $registro, del procedimiento $procedimiento";
-});
+|--------------------------------------------------------------------------
+| Rutas de almacen (productos)x
+|--------------------------------------------------------------------------
 */
 
-//Mejorando codigo de ruta con variables
-Route::get('practicas/{procedimiento}/{registro}',function($procedimiento,$registro){
-    if($registro){//si indica un registro
-        return "Bienvenido al registro: $registro, del procedimiento $procedimiento";
-    }else{//en caso que no se indica un registro
-        return "Bienvenido al procedimiento: $procedimiento";
-    }
+Route::controller(AlmacenController::class)->group(function(){
+    Route::get('almacen', 'index');           // Listar todos los productos en el almacén
+    Route::get('almacen/create', 'create');   // Formulario para agregar un nuevo producto
+    Route::post('almacen/store', 'store');    // Guardar un nuevo producto en la base de datos
+    Route::get('almacen/{id}', 'show');       // Ver detalles de un producto específico
+    Route::get('almacen/{id}/edit', 'edit');  // Formulario para editar un producto
+    Route::put('almacen/{id}', 'update');     // Actualizar un producto
+    Route::delete('almacen/{id}', 'destroy'); // Eliminar un producto del almacén
+});
+
+/*
+|--------------------------------------------------------------------------
+| Página principal
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/', function () {
+    return view('home');
 });
