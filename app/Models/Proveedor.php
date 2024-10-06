@@ -28,7 +28,7 @@ class Proveedor extends Model
 
     }
 
-    protected function rucProveedor(): Attribute{
+    protected function rucProveedor(): Attribute{//Modificamos la entrada y salida de los datos sin afectar la DB
         return new Attribute(
             get: function ($value) {
                 return $value; // No es necesario modificar la salida

@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="container">
-        <h1>En esta pagina podras ver a todos los estudiante</h1>
+        <h1>En esta pagina podras ver a todos los proveedores</h1>
 
         @foreach ($proveedores as $prov)
         <table>

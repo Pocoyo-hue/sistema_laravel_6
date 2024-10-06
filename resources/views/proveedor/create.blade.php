@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="container">
-        <h1>En esta pagina podras crear un nuevo proveedor</h1>
+        <h1>En esta pagina podras editar un proveedor</h1>
         <form action="{{ route('proveedor_store') }}" method="post">
 
             {{csrf_field()}}

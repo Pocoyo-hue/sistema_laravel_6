@@ -4,50 +4,190 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Producto; // Asegúrate de tener el modelo Producto
+use App\Models\Proveedor;
+use Illuminate\Support\Facades\DB;
 
 class AlmacenController extends Controller
 {
     public function index()
     {
         // Obtener todos los productos y pasar a la vista
+        $productos = DB::table('productos')->get();
        
-        return view('almacen.index', compact('productos'));
+        return view('almacen.index',['productos' => $productos]);
     }
 
-    public function create()
-    {
+    public function agregarAlCarrito(Request $request, $id){
+
+        $producto = Producto::find($id);
+
+        // Verificar si el carrito ya existe en la sesión
+        $carrito = session()->get('carrito', []);
+
+        // Si el producto ya está en el carrito, incrementa la cantidad
+        if (isset($carrito[$id])) {
+            $carrito[$id]['cantidad']++;
+        } else {
+            // Si no está en el carrito, agregarlo con cantidad 1
+            $carrito[$id] = [
+                "nombre" => $producto->nombreProducto,
+                "codigo" => $producto->codigoProducto,
+                "cantidad" => $request->get('cantidadProducto'),
+                "ganancia" => $producto->gananciaProducto,
+                "precio" => $producto->precioProducto,
+                "image" => $producto->imageProducto
+            ];
+        }
+
+        // Guardar el carrito en la sesión
+        session()->put('carrito', $carrito);
+
+        return redirect()->back()->with('success', 'Producto agregado al carrito!');
+    }
+
+    public function mostrarCarrito(){
+
+        $carrito = session()->get('carrito', []);
+        return view('almacen.carrito', compact('carrito'));
+        //return redirect('mostrar_carro')->with('carrito', $carrito);
+    }
+
+    public function quitarDelCarrito($id){
+
+        $carrito = session()->get('carrito');
+
+        if (isset($carrito[$id])) {
+            unset($carrito[$id]);
+            session()->put('carrito', $carrito);
+        }
+
+        return redirect()->back()->with('success', 'Producto eliminado del carrito');
+    }
+
+    public function realizarVenta(Request $request){
+
+    $productos = $request->input('productos');
+
+    return redirect()->route('producto_index')->with('success', 'Venta realizada con éxito.');
+    
+    }
+
+    public function create(Request $request){
+
+        $proveedores = DB::table('proveedores')->get();
+
         // Mostrar el formulario para agregar un nuevo producto
-        return view('almacen.create');
+        return view('almacen.create',['proveedores' => $proveedores]);
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
+
         // Validar y guardar el nuevo producto
-        return view('almacen.store');
+        $costo = $request->get('costoProducto');
+        $ganancia = $request->get('gananciaProducto');
+        $total = $costo + $ganancia;
+
+        $producto = new Producto(Array(
+
+            'idProveedor' => $request->get('idProveedor'),
+            'codigoProducto' => $request->get('codigoProducto'),
+            'nombreProducto' => $request->get('nombreProducto'),
+            'descripcionProducto' => $request->get('descripcionProducto'),
+            'cantidadProducto' => $request->get('cantidadProducto'),
+            'costoProducto' => $costo,
+            'gananciaProducto' => $ganancia,
+            'precioProducto' => $total,
+            'imageProducto' => $request->get('imageProducto')
+        ));
+        
+        $producto->save();
+
+        return redirect()->route('producto_index')->with('message', 'Producto creado exitosamente');
+    }
+
+    public function show_all(){
+
+        //Mostrar todos los productos
+        $productos = DB::table('productos')->get();
+
+        return view('almacen.show_all',['productos' => $productos]);
+
     }
 
     public function show($id)
     {
         // Mostrar los detalles de un producto específico
         
-        return view('almacen.show');
+        $producto = Producto::findOrFail($id);
+
+        $proveedor = DB::table('proveedores')
+        ->select('proveedores.*')
+        ->where('proveedores.id',$producto->idProveedor)
+        ->first();
+
+        return redirect()->route('producto_show',$producto->id)
+            ->with('producto', $producto)
+            ->with('proveedor', $proveedor);
+
     }
 
-    public function edit($id)
+    public function show_name(Request $request,$id)
     {
-        // Mostrar el formulario para editar un producto
+        // Mostrar los detalles de un producto específico
         
-        return view('almacen.edit');
+        $producto = DB::table('productos')
+        ->select('productos.id')
+        ->where('productos.nombreProducto',$request->get('nombreProducto'))
+        ->first();
+
+        if($producto != null){
+            return redirect()->route('producto_show',$producto->id);
+        }else{
+            return redirect()->route('producto_index')->with('message', 'Proveedor no existente');
+        }
+
     }
 
-    public function update(Request $request, $id)
+    public function edit_get($id)
     {
-        // Validar y actualizar el producto
-        
-        return view('almacen.index');
+        $producto = Producto::findOrFail($id);
+
+        return redirect()->route('producto_edit',$producto->id)->with('producto', $producto);
     }
 
-    public function destroy($id)
+    public function edit(request $request,$id){
+        
+        return view('almacen.edit',['producto' => $request]);
+    }
+
+    public function update(Request $request, $id){
+        $producto = Producto::findOrFail($id);
+
+        $costo = $request->get('costoProducto');
+        $ganancia = $request->get('gananciaProducto');
+        $total = $costo + $ganancia;
+
+        $producto->update([
+            'imageProducto' => $request->get('imageProducto'),
+            'codigoProducto' => $request->get('codigoProducto'),
+            'nombreProducto' => $request->get('nombreProducto'),
+            'descripcionProducto' => $request->get('descripcionProducto'),
+            'cantidadProducto' => $request->get('cantidadProducto'),
+            'costoProducto' => $costo ,
+            'gananciaProducto' => $ganancia,
+            'precioProducto' => $total
+        ]);
+        
+        return redirect()->route('home')->with('message', 'Producto actualizado exitosamente.');
+    }
+
+    public function destroy(){
+        // Eliminar un producto
+       
+        return view('almacen.create');
+    }
+
+    public function delete($id)
     {
         // Eliminar un producto
        

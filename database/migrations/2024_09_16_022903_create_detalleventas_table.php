@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('detalleventas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('idVenta');
+            $table->foreign('idVenta')->references('id')->on('ventas');
+            $table->unsignedBigInteger('idProducto');
+            $table->foreign('idProducto')->references('id')->on('productos');
+            $table->bigInteger('cantidadDetalleVenta');
+            $table->float('subtotalDetalleVenta');
+            $table->float('totalDetalleVenta');
             $table->timestamps();
         });
     }
