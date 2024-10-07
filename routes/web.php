@@ -45,7 +45,7 @@ Route::controller(AlmacenController::class)->group(function(){
 
 /*
 |--------------------------------------------------------------------------
-| Rutas de proveedores
+| Rutas de proveedores de la ferreteria
 |--------------------------------------------------------------------------
 */
 
