@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Producto;
 use App\Models\User;
 use App\Models\Venta;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -17,18 +18,18 @@ class DatabaseSeeder extends Seeder
 
         // User::factory(10)->create();
 
-        $venta = new Venta();
-        $venta-> metodopago = "Efectivo";
-        $venta-> fechaventa = "29/09/2024";
-        $venta-> totalfactura = 200.10;
-        $venta->save();
+        $producto = new Producto();
+        $producto-> idProveedor = 25487455;
+        $producto-> codigoProducto = 1;
+        $producto-> nombreProducto = "Cemento";
+        $producto-> descripcionProducto = "Puro y de calidad";
+        $producto-> cantidadProducto = 15;
+        $producto-> costoProducto= 25.0;
+        $producto-> gananciaProducto = 5.2;
+        $producto-> precioProducto = 19.8;
+        $producto-> imageProducto= "123";
+        $producto->save();
 
-        $venta2 = new Venta();
-        $venta2-> metodopago = "Tarjeta";
-        $venta2-> fechaventa = "29/09/2024";
-        $venta2-> totalfactura = 50.0;
-        $venta2->save();
-        
        //  User::factory()->create([
        //     'name' => 'Test User',
        //     'email' => 'test@example.com',
