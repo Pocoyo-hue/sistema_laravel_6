@@ -11,13 +11,12 @@
 
     <nav>
         <ul>
+            <li><img src="{{ asset('images/logo.jpg') }}" alt="muestra" width="50px" height="50px”"></li>
             <li><a href="{{route('home')}}">Inicio</a></li>
             <li><a href="">Cliente</a>
                 <ul>
                     <li><a href="{{route('cliente_index')}}">Inicio Cliente</a></li>
                     <li><a href="{{route('cliente_create')}}">Crear Cliente</a></li>
-                    <li><a href="">Listar Cliente</a></li>
-                    <li><a href="">Eliminar Cliente</a></li>
                 </ul>
             </li>
             <li><a href="">Proveedor</a>
@@ -32,13 +31,14 @@
                 <ul>
                     <li><a href="{{route('producto_index')}}">Inicio Producto</a></li>
                     <li><a href="{{route('producto_create')}}">Crear Producto</a></li>
-                    <li><a href="">Buscar Producto</a></li>
-                    <li><a href="{{route('producto_show_all')}}">Listar Producto</a></li>
-                    <li><a href="">Eliminar Producto</a></li>
                     <li><a href="{{route('mostrar_carro')}}">Carrito de Venta</a></li>
                 </ul>
             </li>
-            <li><a href="">Venta</a></li>
+            <li><a href="">Venta</a>
+                <ul>
+                    <li><a href="{{route('venta_index')}}">Inicio Ventas</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 
@@ -46,5 +46,8 @@
     <main>
     @yield('content')
     </main>
+    <!-- <footer>
+    <img src="{{ asset('images/footer.jpg') }}" alt="muestra" width="1000px" height="1000px”">
+    </footer> -->
 </body>
 </html>

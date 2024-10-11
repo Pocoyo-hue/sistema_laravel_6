@@ -28,6 +28,5 @@
             </tr>
         </table>
         @endforeach
-        <button><a href="{{ route('proveedor_index') }}">Volver Inicio Proveedor</a></button>
     </div>
 @endsection

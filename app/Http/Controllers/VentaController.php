@@ -70,6 +70,10 @@ class VentaController extends Controller
             ]);
         
             $detalle_venta->save();
+
+            DB::table('productos')
+            ->where('id', $producto['id'])
+            ->decrement('cantidadProducto', $producto['cantidad']);
         }
 
         return redirect()->route('venta_index');
