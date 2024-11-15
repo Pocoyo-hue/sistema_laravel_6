@@ -2,6 +2,7 @@
 @extends('layouts.plantilla')
 
 @section('title','SOCIO CONSTRUCTOR - Sistema de Ventas y Almacén')
+
 @if(session('message'))
     <div class="alert alert-warning">
         {{ session('message') }}

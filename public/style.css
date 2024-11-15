@@ -1,30 +1,6 @@
-@charset "utf-8";
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    top: 0; /* Asegúrate de que el menú esté en la parte superior */
-    left: 0; /* Esto lo coloca alineado a la izquierda */
-    justify-content: center;
-    align-items: center;
-}
-
-html, body {
-    height: 100%;
-    font-family: Arial, sans-serif;
-}
-
-footer {
+/* footer {
     background-color: #333;
     color: white;
     text-align: center;
@@ -32,7 +8,7 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;
-}
+} */
 
 main{
 
@@ -210,7 +186,7 @@ tr:hover {
 
 
 
-header { 
+/* header { 
     background: rgba(0, 0, 0, 0.7);
     width: 100%;
     position: fixed;
@@ -233,7 +209,7 @@ nav ul {
 }
 
 nav ul li {
-    position: relative; /* Necesario para los submenús */
+    position: relative;
     margin-right: 20px;
 }
 
@@ -252,13 +228,13 @@ nav ul li:hover {
 nav ul li ul {
     display: none;
     position: absolute;
-    top: 100%; /* Para que el submenú se muestre justo debajo del elemento principal */
+    top: 100%; 
     left: 0;
     background-color: rgba(0, 0, 0, 0.8);
     padding: 0;
     list-style: none;
     border-radius: 5px;
-    min-width: 180px; /* Puedes ajustar el ancho mínimo */
+    min-width: 180px; 
     z-index: 200;
 }
 
@@ -276,15 +252,15 @@ nav ul li ul li a:hover {
 }
 
 nav ul li:hover > ul {
-    display: block; /* Muestra el submenú al pasar el cursor */
+    display: block; 
 }
 
 nav ul li ul li:hover > ul {
-    display: block; /* Para submenús de varios niveles */
+    display: block; 
 }
 
 nav ul li ul li ul {
-    left: 100%; /* Para submenús anidados, se muestra al lado derecho del submenú padre */
+    left: 100%; 
     top: 0;
 }
 
@@ -294,4 +270,4 @@ nav ul li ul li ul li a {
 
 nav ul li ul li ul li a:hover {
     background: #eca023;
-}
+} */

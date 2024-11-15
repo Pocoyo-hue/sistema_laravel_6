@@ -17,8 +17,8 @@ class ProductoFactory extends Factory
     public function definition(): array
     {
         return [
-            'idProveedor' => 25487455,  // Valor fijo, puedes modificarlo si lo deseas
-            'codigoProducto' => 1,       // Valor fijo, puedes cambiarlo a un valor generado dinámicamente si es necesario
+            'idProveedor' => 1,  // Valor fijo, puedes modificarlo si lo deseas
+            'codigoProducto' => 123456789123,       // Valor fijo, puedes cambiarlo a un valor generado dinámicamente si es necesario
             'nombreProducto' => $this->faker->word(), // Generar un nombre de producto aleatorio
             'descripcionProducto' => $this->faker->sentence(), // Generar una descripción aleatoria
             'cantidadProducto' => $this->faker->randomNumber(2), // Generar una cantidad aleatoria

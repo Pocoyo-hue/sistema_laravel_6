@@ -22,7 +22,7 @@ return new class extends Migration
             $table->float('costoProducto', 8, 2);
             $table->float('gananciaProducto', 8, 2);
             $table->float('precioProducto', 8, 2);
-            $table->string('imageProducto', 250);
+            $table->string('imageProducto', 10000);
             $table->timestamps();
         });
     }

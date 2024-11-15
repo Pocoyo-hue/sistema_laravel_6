@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link href="{{asset('./style.css')}}" rel="stylesheet">
     <title>@yield('title')</title>
 </head>
@@ -46,8 +46,9 @@
     <main>
     @yield('content')
     </main>
-    <!-- <footer>
-    <img src="{{ asset('images/footer.jpg') }}" alt="muestra" width="1000px" height="1000px”">
-    </footer> -->
 </body>
-</html>
+</html> -->
+
+@extends('adminlte::page')
+
+

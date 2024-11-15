@@ -6,6 +6,8 @@ use App\Http\Controllers\AlmacenController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\LoginController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -95,4 +97,8 @@ Route::controller(ClienteController::class)->group(function(){
 //     return view('home');
 // });
 
-Route::get('/',HomeController::class)->name('home');
+Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
+Route::get('/home',HomeController::class)->name('home');
+Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

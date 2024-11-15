@@ -43,4 +43,7 @@
             <button type="submit">Agregar Producto</button>
         </form>
     </div>
+
+
+    
 @endsection
