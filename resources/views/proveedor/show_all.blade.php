@@ -1,32 +1,44 @@
-
 @extends('layouts.plantilla')
 
 @section('title','Proveedores')
 
 @section('content')
-    <div class="container">
-        <h1>En esta pagina podras ver a todos los proveedores</h1>
+    <div class="container" style="margin-top: 30px;">
 
-        @foreach ($proveedores as $prov)
-        <table>
-            <tr>
-                <th>Razon Social</th>
-                <th>RUC</th>
-                <th>Direccion Proveedor</th>
-                <th>Telefono Proveedor</th>
-                <th>Correo Proveedor</th>
-            </tr>
-            <tr>
-                <td>{{$prov->razonSocial}}</td>
-                <td>{{$prov->rucProveedor}}</td>
-                <td>{{$prov->direccionProveedor}}</td>
-                <td>{{$prov->telefonoProveedor}}</td>
-                <td>{{$prov->correoProveedor}}</td>
-                <td><a href="{{route('proveedor_get2',$prov->id)}}">EDITAR</a></td>
-                <td><a href="{{route('delete_get',$prov->id)}}">BORRAR</a></td>
-            </tr>
+        <h1 class="text-center" style="color: #007bff; font-weight: bold; margin-bottom: 30px;">Listado de Proveedores</h1>
+
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+            <thead>
+                <tr style="background-color: #f8f9fa; color: #333;">
+                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Razon Social</th>
+                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">RUC</th>
+                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Dirección</th>
+                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Teléfono</th>
+                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Correo</th>
+                    <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($proveedores as $prov)
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{$prov->razonSocial}}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{$prov->rucProveedor}}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{$prov->direccionProveedor}}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{$prov->telefonoProveedor}}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{$prov->correoProveedor}}</td>
+                    <td style="text-align: center; padding: 10px; border: 1px solid #ddd;">
+                        <a href="{{route('proveedor_get2',$prov->id)}}" style="color: #007bff; text-decoration: none; margin-right: 15px;">Editar</a>
+                        <a href="{{route('delete_get',$prov->id)}}" style="color: #dc3545; text-decoration: none;">Borrar</a>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
         </table>
-        @endforeach
-        <button><a href="{{ route('proveedor_index') }}">Volver Inicio Proveedor</a></button>
+
+        <div class="text-center">
+            <button style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; border: none; font-weight: bold; cursor: pointer;">
+                <a href="{{ route('proveedor_index') }}" style="color: white; text-decoration: none;">Volver a Inicio</a>
+            </button>
+        </div>
     </div>
 @endsection

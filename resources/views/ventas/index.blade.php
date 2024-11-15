@@ -1,20 +1,22 @@
-
 @extends('layouts.plantilla')
 
-@section('title','Ventas')
+@section('title', 'Ventas')
 
 @section('content')
-    <div class="container">
-        <h1>En esta pagina podras ver a todos las ventas</h1>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Listado de Ventas</h1>
 
-        <table>
+        <table class="table table-striped table-bordered">
+            <thead>
                 <tr>
-                    <th>Fecha venta</th>
+                    <th>Fecha Venta</th>
                     <th>Subtotal Venta</th>
                     <th>Ganancias Venta</th>
                     <th>IGV Venta</th>
                     <th>Total Venta</th>
                 </tr>
+            </thead>
+            <tbody>
                 @foreach ($ventas as $venta)
                     <tr>
                         <td>{{ $venta->fechaVenta }}</td>
@@ -24,6 +26,7 @@
                         <td>{{ $venta->totalVenta }}</td>
                     </tr>
                 @endforeach
-            </table>
+            </tbody>
+        </table>
     </div>
 @endsection

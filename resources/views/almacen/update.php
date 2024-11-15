@@ -20,7 +20,8 @@
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            width: 100%;
+            max-width: 400px;
         }
         h1 {
             text-align: center;
@@ -60,23 +61,34 @@
             border-color: #1e90ff; /* Azul */
             outline: none;
         }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            input[type="text"], input[type="number"] {
+                font-size: 0.9em;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Actualizar Producto</h1>
         <form action="/almacen/update" method="POST">
+            @csrf
+            @method('PUT') <!-- Laravel method spoofing -->
+            
             <label for="nombre">Nombre del Producto:</label>
-            <input type="text" id="nombre" name="nombre" value="Producto X" required>
+            <input type="text" id="nombre" name="nombre" value="{{ $producto->nombre ?? 'Producto X' }}" required>
 
             <label for="precio">Precio:</label>
-            <input type="text" id="precio" name="precio" value="100.00" required>
+            <input type="text" id="precio" name="precio" value="{{ $producto->precio ?? '100.00' }}" required>
 
             <label for="stock">Cantidad en Stock:</label>
-            <input type="number" id="stock" name="stock" value="50" required>
+            <input type="number" id="stock" name="stock" value="{{ $producto->stock ?? '50' }}" required>
 
             <label for="categoria">Categoría:</label>
-            <input type="text" id="categoria" name="categoria" value="Herramientas" required>
+            <input type="text" id="categoria" name="categoria" value="{{ $producto->categoria ?? 'Herramientas' }}" required>
 
             <button type="submit">Guardar Cambios</button>
         </form>

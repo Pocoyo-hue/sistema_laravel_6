@@ -20,7 +20,8 @@
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            width: 100%;
+            max-width: 400px; /* Ensures the container doesn't exceed 400px */
             text-align: center;
         }
         h1 {
@@ -52,6 +53,14 @@
         }
         .btn:hover {
             background-color: #005bb5; /* Azul más oscuro */
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            p {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
