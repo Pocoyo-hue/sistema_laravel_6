@@ -97,7 +97,7 @@ Route::controller(ClienteController::class)->group(function(){
 //     return view('home');
 // });
 
-Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
+Route::get('/', [LoginController::class, 'showLoginForm'])->name('custom_login');
 Route::get('/home',HomeController::class)->name('home');
 Auth::routes();
 
