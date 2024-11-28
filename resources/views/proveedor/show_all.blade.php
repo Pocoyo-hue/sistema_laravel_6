@@ -28,7 +28,6 @@
                     <td style="padding: 10px; border: 1px solid #ddd;">{{$prov->correoProveedor}}</td>
                     <td style="text-align: center; padding: 10px; border: 1px solid #ddd;">
                         <a href="{{route('proveedor_get2',$prov->id)}}" style="color: #007bff; text-decoration: none; margin-right: 15px;">Editar</a>
-                        <a href="{{route('delete_get',$prov->id)}}" style="color: #dc3545; text-decoration: none;">Borrar</a>
                     </td>
                 </tr>
                 @endforeach
