@@ -354,10 +354,6 @@ return [
                     'text' => 'Listar Proveedores',
                     'route' => 'show_proveedor_all',
                 ],
-                [
-                    'text' => 'Eliminar Proveedor',
-                    'route' => 'proveedor_destroy',
-                ],
             ],
         ],
         
