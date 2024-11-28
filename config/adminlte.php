@@ -370,6 +370,10 @@ return [
                     'route' => 'producto_index',
                 ],
                 [
+                    'text' => 'Listar Producto',
+                    'route' => 'producto_show_all',
+                ],
+                [
                     'text' => 'Crear Producto',
                     'route' => 'producto_create',
                 ],

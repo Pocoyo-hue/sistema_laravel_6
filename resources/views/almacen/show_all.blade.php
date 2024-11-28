@@ -32,7 +32,6 @@
                     <td>{{$pro->gananciaProducto}}</td>
                     <td>{{$pro->precioProducto}}</td>
                     <td><a href="{{route('producto_get',$pro->id)}}">EDITAR</a></td>
-                    <td><a href="{{route('delete_get',$pro->id)}}">BORRAR</a></td>
                 </tr>
                 @endforeach
             </tbody>
