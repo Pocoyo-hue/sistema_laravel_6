@@ -4,6 +4,26 @@
 @section('title','Productos')
 
 @section('content')
+
+
+    @if(session('message'))
+        <div class="alert alert-warning">
+            {{ session('message') }}
+        </div>
+    @endif
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    
     <div class="container">
         <h1>En esta pagina podras ver a todos los prodcutos</h1>
 

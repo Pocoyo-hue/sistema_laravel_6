@@ -3,13 +3,26 @@
 
 @section('title','SOCIO CONSTRUCTOR - Sistema de Ventas y Almacén')
 
-@if(session('message'))
-    <div class="alert alert-warning">
-        {{ session('message') }}
-    </div>
-@endif
 
 @section('content')
+
+    @if(session('message'))
+        <div class="alert alert-warning">
+            {{ session('message') }}
+        </div>
+    @endif
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <div class="container">
         <h1 class="page-title">Bienvenido a la Página de Inicio</h1>
         <div class="image-container">

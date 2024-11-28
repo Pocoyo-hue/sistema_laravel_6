@@ -17,33 +17,48 @@ class AlmacenController extends Controller
         return view('almacen.index',['productos' => $productos]);
     }
 
-    public function agregarAlCarrito(Request $request, $id){
+    public function agregarAlCarrito(Request $request, $id)
+{
+    $producto = Producto::find($id);
 
-        $producto = Producto::find($id);
-
-        // Verificar si el carrito ya existe en la sesión
-        $carrito = session()->get('carrito', []);
-
-        // Si el producto ya está en el carrito, incrementa la cantidad
-        if (isset($carrito[$id])) {
-            $carrito[$id]['cantidad']++;
-        } else {
-            // Si no está en el carrito, agregarlo con cantidad 1
-            $carrito[$id] = [
-                "nombre" => $producto->nombreProducto,
-                "codigo" => $producto->codigoProducto,
-                "cantidad" => $request->get('cantidadProducto'),
-                "ganancia" => $producto->gananciaProducto,
-                "precio" => $producto->precioProducto,
-                "image" => $producto->imageProducto
-            ];
-        }
-
-        // Guardar el carrito en la sesión
-        session()->put('carrito', $carrito);
-
-        return redirect()->back()->with('success', 'Producto agregado al carrito!');
+    // Verificar si el producto existe
+    if (!$producto) {
+        return redirect()->back()->with('error', 'Producto no encontrado.');
     }
+
+    // Verificar si la cantidad solicitada no excede el stock
+    $cantidadSolicitada = $request->get('cantidadProducto');
+    if ($cantidadSolicitada > $producto->stockProducto) {
+        return redirect()->back()->with('error', 'La cantidad solicitada excede el stock disponible.');
+    }
+
+    // Verificar si el carrito ya existe en la sesión
+    $carrito = session()->get('carrito', []);
+
+    // Si el producto ya está en el carrito, incrementar la cantidad
+    if (isset($carrito[$id])) {
+        // Verificar si la cantidad total después del incremento excede el stock
+        if ($carrito[$id]['cantidad'] + $cantidadSolicitada > $producto->stockProducto) {
+            return redirect()->back()->with('error', 'La cantidad total en el carrito excede el stock disponible.');
+        }
+        $carrito[$id]['cantidad'] += $cantidadSolicitada;
+    } else {
+        // Si no está en el carrito, agregarlo con la cantidad solicitada
+        $carrito[$id] = [
+            "nombre" => $producto->nombreProducto,
+            "codigo" => $producto->codigoProducto,
+            "cantidad" => $cantidadSolicitada,
+            "ganancia" => $producto->gananciaProducto,
+            "precio" => $producto->precioProducto,
+            "image" => $producto->imageProducto
+        ];
+    }
+
+    // Guardar el carrito en la sesión
+    session()->put('carrito', $carrito);
+
+    return redirect()->back()->with('success', 'Producto agregado al carrito!');
+}
 
     public function mostrarCarrito(){
 
