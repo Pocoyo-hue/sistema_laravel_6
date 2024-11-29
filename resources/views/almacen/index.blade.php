@@ -130,7 +130,7 @@
         </div>
     @endif
 
-    <h1>En esta pagina podras ver a todos los prodcutos</h1>
+    <h1>En esta pagina podras ver a todos los productos</h1>
     <div class="container">
 
         @foreach ($productos as $pro)
@@ -140,7 +140,7 @@
             <div class="titulo">S/ {{$pro->precioProducto}}</div>
             @if($pro->cantidadProducto < 5)
                 <div class="titulo text-danger font-weight-bold">
-                    STOCK: {{ $pro->cantidadProducto }} (Bajo stock)
+                    STOCK: {{ $pro->cantidadProducto }} (Bajo stock) Reabastecer Producto
                 </div>
             @else
                 <div class="titulo">
@@ -148,12 +148,13 @@
                 </div>
             @endif
             <div class="cuerpo">
-
-            <img src="{{$pro->imageProducto}}.jpg" alt="muestra" width="150px" height="150px”">
-
-                {{$pro->descripcionProducto}}
-
+                <img src="{{$pro->imageProducto}}.jpg" alt="muestra" width="150px" height="150px">
+                <div style="text-align: center; font-weight: bold;">
+                    {{$pro->descripcionProducto}}
+                </div>
             </div>
+            
+                
 
             <div class="pie">
                 <form action="{{route('agregar_carro',$pro->id)}}" method="post">
