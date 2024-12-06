@@ -17,18 +17,18 @@ class AlmacenController extends Controller
         return view('almacen.index',['productos' => $productos]);
     }
 
-    public function agregarAlCarrito(Request $request, $id)
-{
+    public function agregarAlCarrito(Request $request, $id){
+
     $producto = Producto::find($id);
 
     // Verificar si el producto existe
     if (!$producto) {
         return redirect()->back()->with('error', 'Producto no encontrado.');
     }
-
+    
     // Verificar si la cantidad solicitada no excede el stock
     $cantidadSolicitada = $request->get('cantidadProducto');
-    if ($cantidadSolicitada > $producto->stockProducto) {
+    if ($cantidadSolicitada > $producto->cantidadProducto) {
         return redirect()->back()->with('error', 'La cantidad solicitada excede el stock disponible.');
     }
 

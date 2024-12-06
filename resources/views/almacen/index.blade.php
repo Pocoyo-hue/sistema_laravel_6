@@ -162,7 +162,8 @@
                     {{csrf_field()}}
 
                     <label for="">Cantidad:</label>
-                    <input type="number" name="cantidadProducto" min="1" value="1" required>
+                    <input type="number" name="cantidadProducto" min="1" max="{{ $pro->cantidadProducto }}" value="1" required>
+
 
 
 
