@@ -38,7 +38,7 @@ class AlmacenController extends Controller
     // Si el producto ya está en el carrito, incrementar la cantidad
     if (isset($carrito[$id])) {
         // Verificar si la cantidad total después del incremento excede el stock
-        if ($carrito[$id]['cantidad'] + $cantidadSolicitada > $producto->stockProducto) {
+        if ($carrito[$id]['cantidad'] + $cantidadSolicitada > $producto->cantidadProducto) {
             return redirect()->back()->with('error', 'La cantidad total en el carrito excede el stock disponible.');
         }
         $carrito[$id]['cantidad'] += $cantidadSolicitada;
